@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>再次遇见 · 雨燕直播</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f5f7fa;
+            color: #1e293b;
+            line-height: 1.7;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(145deg, #0b1120 0%, #1a253d 100%);
+            color: #e3e9f2;
+            padding: 2.8rem 1.5rem 3.2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, rgba(88,130,230,0.08) 0%, transparent 70%);
+            top: -60px;
+            right: -40px;
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero h1 span {
+            color: #86b0ff;
+            font-weight: 600;
+        }
+
+        .hero .sub {
+            font-size: 1.05rem;
+            color: #b3c6e0;
+            max-width: 540px;
+            margin: 0 auto;
+            opacity: 0.85;
+        }
+
+        /* 导航 -- 极简徽章式 */
+        .top-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem 2rem;
+            padding: 1rem 1.5rem;
+            background: #ffffffd9;
+            backdrop-filter: blur(4px);
+            border-bottom: 1px solid #e5eaf0;
+            margin-top: 0;
+        }
+
+        .top-nav a {
+            color: #1e2f4e;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.25rem 0.1rem;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .top-nav a:hover {
+            border-bottom-color: #3b6ed8;
+            color: #1a3a7a;
+        }
+
+        /* 主内容区 浅色 */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            margin: 3rem 0 4rem;
+        }
+
+        .intro-box {
+            background: white;
+            border-radius: 28px;
+            padding: 2.2rem 2rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.02);
+            border: 1px solid #edf2f9;
+        }
+
+        .intro-box p {
+            margin-bottom: 1.2rem;
+            font-size: 1.02rem;
+        }
+
+        .intro-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .em-text a {
+            color: #2a5fc1;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #98b2e6;
+        }
+
+        .em-text a:hover {
+            color: #163d82;
+            border-bottom-style: solid;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.4rem;
+            color: #0a1c3a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title small {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #697b98;
+        }
+
+        /* 场景卡片 */
+        .scene-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .scene-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.6rem 1.5rem;
+            border: 1px solid #e5ecf5;
+            transition: transform 0.15s, box-shadow 0.2s;
+        }
+
+        .scene-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px -8px rgba(15,30,60,0.10);
+        }
+
+        .scene-card .emoji-badge {
+            font-size: 1.6rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .scene-card h3 {
+            font-weight: 500;
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+            color: #111f38;
+        }
+
+        .scene-card p {
+            color: #3f4d67;
+            font-size: 0.95rem;
+        }
+
+        /* FAQ 摘要 —— 简洁无折叠 */
+        .faq-list {
+            background: white;
+            border-radius: 28px;
+            padding: 1.8rem 2rem;
+            border: 1px solid #eef3fa;
+        }
+
+        .faq-item {
+            padding: 0.9rem 0;
+            border-bottom: 1px solid #e7ecf3;
+        }
+
+        .faq-item:last-child {
+            border-bottom: 0;
+        }
+
+        .faq-q {
+            font-weight: 500;
+            color: #0f2642;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .faq-q::before {
+            content: "·";
+            color: #2a5fc1;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .faq-a {
+            padding-left: 1.2rem;
+            color: #3f526e;
+            font-size: 0.95rem;
+        }
+
+        .faq-a a {
+            color: #2a5fc1;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: #b6caf0;
+        }
+
+        .faq-a a:hover {
+            color: #102f62;
+        }
+
+        .footnote {
+            margin-top: 3rem;
+            text-align: center;
+            padding: 2rem 0 1.5rem;
+            border-top: 1px solid #dce2ec;
+            color: #55647b;
+            font-size: 0.9rem;
+        }
+
+        .footnote a {
+            color: #1d4a9e;
+            text-decoration: none;
+            border-bottom: 1px dotted #a7bde3;
+        }
+
+        .footnote a:hover {
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .intro-box {
+                padding: 1.5rem 1.2rem;
+            }
+            .faq-list {
+                padding: 1.2rem 1.2rem;
+            }
+            .top-nav {
+                gap: 0.6rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部简洁导航 / 收藏标记 -->
+    <nav class="top-nav">
+        <a href="#recall">再次来访</a>
+        <a href="#scenes">使用场景</a>
+        <a href="#faq">常见说明</a>
+        <a href="#about">关于站点</a>
+    </nav>
+
+    <!-- 深色头图 hero -->
+    <header class="hero">
+        <h1>标记 · <span>雨燕</span>直播</h1>
+        <p class="sub">为下一次相遇，预留一个安静的入口。</p>
+    </header>
+
+    <div class="container">
+
+        <!-- 核心介绍：以再次访问与收藏为线索 -->
+        <section id="recall">
+            <div class="intro-box">
+                <p>一次浏览，未必能记住所有路径。许多页面在关闭标签页后便沉入历史记录深处。而有些地方你会想再次回去——比如那些内容稳定、节奏合拍的直播间。</p>
+                <p>正因为如此，我为 <a href="https://cn-main-yuyan.com" class="em-text">雨燕直播</a> 保留了一个书签位。每次打开，不需要重新搜索，直接就能落在熟悉的界面。它不依赖推送，不制造打扰，只在你需要的时候出现。</p>
+                <p>如果你也曾因为忘记地址而绕路，不妨现在收藏这个页面。下次想回来时，它会在这里。</p>
+            </div>
+        </section>
+
+        <!-- 三个场景模块 -->
+        <section id="scenes">
+            <div class="section-title">
+                🎧 三个值得收藏的场景
+                <small>轻量、安静、可复用</small>
+            </div>
+            <div class="scene-grid">
+                <div class="scene-card">
+                    <div class="emoji-badge">🌿</div>
+                    <h3>日常背景音</h3>
+                    <p>打开 <a href="https://cn-main-yuyan.com" class="em-text">雨燕直播</a>，把页面放在第二屏。不需要时刻注视，有声音陪伴就足够。适合阅读、家务或放空时刻。</p>
+                </div>
+                <div class="scene-card">
+                    <div class="emoji-badge">📌</div>
+                    <h3>专注间隙</h3>
+                    <p>完成一个任务后，切到直播页面停留几分钟。节奏自然的直播内容可以帮助大脑从紧张中脱离，又不至于陷入信息洪流。</p>
+                </div>
+                <div class="scene-card">
+                    <div class="emoji-badge">🔖</div>
+                    <h3>固定入口</h3>
+                    <p>把地址栏变成一种习惯。每次打开浏览器，书签栏里总有一个熟悉的名字。不用思考，直接点击就能回到同样的空间。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 常见说明 FAQ 摘要 -->
+        <section id="faq">
+            <div class="section-title">
+                📋 常见说明
+                <small>简洁版</small>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-q">页面有时会更新吗？</div>
+                    <div class="faq-a">通常保持稳定。如果内容结构有调整，会尽量保持旧书签仍然可用。你也可以留意页面顶部的导航，作为辅助参考。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">可以直接分享这个链接吗？</div>
+                    <div class="faq-a">当然。直接把地址 <a href="https://cn-main-yuyan.com">雨燕直播</a> 发给朋友即可。没有多余参数或跟踪标记。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">需要注册或登录吗？</div>
+                    <div class="faq-a">直播内容可以直接浏览，不需要额外注册。不过部分个性化功能（如收藏频道）可能需要账号，具体以页面内的指引为准。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">移动端是否适配？</div>
+                    <div class="faq-a">响应式布局，手机和电脑均可正常使用。如果遇到显示异常，可以尝试刷新或切换横竖屏。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 收尾 / 持续关注 -->
+        <section id="about">
+            <div class="intro-box" style="background: #f9fbfe;">
+                <p style="margin-bottom: 0.6rem; font-weight: 500; color: #0e2342;">📎 持续关注，但不打扰</p>
+                <p>这个页面不会自动推送消息，没有弹窗，没有浮动广告。它只是一个安静的索引点，用来连接你和 <a href="https://cn-main-yuyan.com" class="em-text">雨燕直播</a> 之间的通道。</p>
+                <p style="margin-top: 0.8rem;">如果你决定将它加入收藏夹，我建议命名为“雨燕 · 直达”。下次想回来时，一眼就能找到。</p>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="footnote">
+        <p>✦ 标记一处安心角落 · <a href="https://cn-main-yuyan.com">雨燕直播</a> ✦</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.7;">再次来访，无需绕路。</p>
+    </footer>
+
+</body>
+</html>
